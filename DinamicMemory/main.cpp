@@ -9,6 +9,8 @@ int* push_back(int arr[], int& n, int elem);
 int* push_front(int arr[], int& n, int elem);
 int* insert(int arr[], int& n, int elem, int pos);
 int* pop_back(int arr[], int& n);
+int* pop_front(int arr[], int& n);
+int* erase(int arr[], int& n, int pos);
 
 void main() 
 {
@@ -44,6 +46,15 @@ void main()
 	Print(arr, n);
 	cout << endl;
 
+	arr = pop_front(arr, n);
+	cout << "Массив без первого элемента: ";
+	Print(arr, n);
+	cout << endl;
+
+	cout << "Введите позицию удаляемого элемента:"; cin >> pos;
+	arr = erase(arr, n, pos);
+	Print(arr, n);
+	cout << endl;
 	delete[] arr;
 }
 
@@ -104,6 +115,24 @@ int* pop_back(int arr[], int& n)
 	int* arr2 = new int[--n];
 	for (int i = 0; i < n; i++)
 		arr2[i] = arr[i];
+	delete[] arr;
+	return arr2;
+}
+
+int* pop_front(int arr[], int& n)
+{
+	int* arr2 = new int[--n];
+	for (int i = 0; i < n; i++)
+		arr2[i] = arr[i+1];
+	delete[] arr;
+	return arr2;
+}
+
+int* erase(int arr[], int& n, int pos) 
+{
+	int* arr2 = new int[--n];
+	for (int i = 0; i < n; i++)
+		arr2[i] = arr[i < (pos - 1) ? i : i + 1];
 	delete[] arr;
 	return arr2;
 }
