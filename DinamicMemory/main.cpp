@@ -12,34 +12,34 @@ using std::endl;
 void Allocate(int**& arr, const int rows, const int cols);
 void Clear(int** arr, const int rows);
 
-void FillRand(int arr[], const int n);
+template <class T> void FillRand(T arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
 
-void Print(int arr[], const int n);
+template <class T> void Print(T arr[], const int n);
 void Print(int** arr, const int rows, const int cols);
 
-int* push_back(int arr[], int& n, int elem);
+template <class T> T* push_back(T arr[], int& n, T elem);
 int** push_row_back(int** arr, int& rows, const int cols);
 int** push_col_back(int** arr, const int rows, int& cols);
 
 
-int* push_front(int arr[], int& n, int elem);
+template <class T> T* push_front(T arr[], int& n, T elem);
 int** push_row_front(int** arr, int& rows, const int cols);
 int** push_col_front(int** arr, const int rows, int& cols);
 
-int* insert(int arr[], int& n, int elem, int pos);
+template <class T> T* insert(T arr[], int& n, T elem, int pos);
 int** insert_row(int** arr, int& rows, const int cols, int pos);
 int** insert_col(int** arr, const int rows, int& cols, int pos);
 
-int* pop_back(int arr[], int& n);
+template <class T> T* pop_back(T arr[], int& n);
 int** pop_row_back(int** arr, int& rows, const int cols);
 int** pop_col_back(int** arr, const int rows, int& cols);
 
-int* pop_front(int arr[], int& n);
+template <class T> T* pop_front(T arr[], int& n);
 int** pop_row_front(int** arr, int& rows, const int cols);
 int** pop_col_front(int** arr, const int rows, int& cols);
 
-int* erase(int arr[], int& n, int pos);
+template <class T> T* erase(T arr[], int& n, int pos);
 int** erase_row(int** arr, int& rows, const int cols, int pos);
 int** erase_col(int** arr, const int rows, int& cols, int pos);
 
@@ -177,7 +177,7 @@ void Clear(int** arr, const int rows) {
 	delete[]arr;
 }
 
-void FillRand(int arr[], const int n) 
+template <class T> void FillRand(T arr[], const int n)
 {
 	for (int i = 0; i < n; i++) 
 	{
@@ -195,7 +195,7 @@ void FillRand(int** arr, const int rows, const int cols)
 		}
 	}
 }
-void Print(int arr[], const int n) 
+template <class T> void Print(T arr[], const int n)
 {
 	for (int i = 0; i < n; i++) 
 	{
@@ -214,9 +214,9 @@ void Print(int** arr, const int rows, const int cols)
 		cout << endl;
 	}
 }
-int* push_back(int arr[], int& n, int elem) 
+template <class T> T* push_back(T arr[], int& n, T elem)
 {
-	int* arr2 = new int[n +1];
+	T* arr2 = new T[n +1];
 	for (int i = 0; i < n; i++)
 		arr2[i] = arr[i];
 	arr2[n] = elem;
@@ -252,9 +252,9 @@ int** push_col_back(int** arr, const int rows, int& cols)
 	return buffer;
 }
 
-int* push_front(int arr[], int& n, int elem) 
+template <class T> T* push_front(T arr[], int& n, T elem)
 {
-	int* arr2 = new int[n + 1];
+	T* arr2 = new T[n + 1];
 	n++;
 	for (int i = 1; i < n; i++)
 		arr2[i] = arr[i-1];
@@ -289,9 +289,9 @@ int** push_col_front(int** arr, const int rows, int& cols)
 	return buffer;
 }
 
-int* insert(int arr[], int& n, int elem, int pos) 
+template <class T> T* insert(T arr[], int& n, T elem, int pos)
 {
-	int* arr2 = new int[n + 1];
+	T* arr2 = new T[n + 1];
 	for (int i = 0; i < n; i++) 
 	{
 		arr2[i < (pos-1) ? i : i + 1] = arr[i];
@@ -328,9 +328,9 @@ int** insert_col(int** arr, const int rows, int& cols, int pos)
 	return buffer;
 }
 
-int* pop_back(int arr[], int& n)
+template <class T> T* pop_back(T arr[], int& n)
 {
-	int* arr2 = new int[--n];
+	T* arr2 = new T[--n];
 	for (int i = 0; i < n; i++)
 		arr2[i] = arr[i];
 	delete[] arr;
@@ -361,9 +361,9 @@ int** pop_col_back(int** arr, const int rows, int& cols)
 	return buffer;
 }
 
-int* pop_front(int arr[], int& n)
+template <class T> T* pop_front(T arr[], int& n)
 {
-	int* arr2 = new int[--n];
+	T* arr2 = new T[--n];
 	for (int i = 0; i < n; i++)
 		arr2[i] = arr[i+1];
 	delete[] arr;
@@ -394,9 +394,9 @@ int** pop_col_front(int** arr, const int rows, int& cols)
 	return buffer;
 }
 
-int* erase(int arr[], int& n, int pos) 
+template <class T> T* erase(T arr[], int& n, int pos)
 {
-	int* arr2 = new int[--n];
+	T* arr2 = new T[--n];
 	for (int i = 0; i < n; i++)
 		arr2[i] = arr[i < (pos - 1) ? i : i + 1];
 	delete[] arr;
