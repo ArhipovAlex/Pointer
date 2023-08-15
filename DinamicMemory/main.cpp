@@ -43,7 +43,7 @@ template <class T> T* erase(T arr[], int& n, int pos);
 template <class T> T** erase_row(T** arr, int& rows, const int cols, int pos);
 template <class T> T** erase_col(T** arr, const int rows, int& cols, int pos);
 
-#define DYNAMIC_MEMORY_1
+//#define DYNAMIC_MEMORY_1
 #define DYNAMIC_MEMORY_2
 
 void main() 
@@ -267,7 +267,7 @@ template <class T> T** push_row_front(T** arr, int& rows, const int cols)
 	//1) Создаем буфферный массив указателей
 	T** buffer = new T* [rows + 1] {};
 	//2) Копируем адреса строк в новый массив:
-	for (int i = 1; i < rows; i++)buffer[i] = arr[i-1];
+	for (int i = 0; i < rows; i++)buffer[i+1] = arr[i];
 	//3) Удаляем исходный массив указателей:
 	delete[] arr;
 	//4) Создаем добавляемую строку:
@@ -306,11 +306,11 @@ template <class T> T** insert_row(T** arr, int& rows, const int cols, int pos)
 	//1) Создаем буфферный массив указателей
 	T** buffer = new T* [rows + 1] {};
 	//2) Копируем адреса строк в новый массив, минуя позицию для новой строки:
-	for (int i = 0; i < rows; i++)buffer[i < (pos - 1) ? i : i + 1] = arr[i];
+	for (int i = 0; i < rows; i++)buffer[i < (pos) ? i : i + 1] = arr[i];
 	//3) Удаляем исходный массив указателей:
 	delete[] arr;
 	//4) Создаем добавляемую строку на указанную позицию:
-	buffer[pos-1] = new T[cols] {};
+	buffer[pos] = new T[cols] {};
 	//5) После добавления строки увеличиваем количество строк:
 	rows++;
 	return buffer;
@@ -341,7 +341,7 @@ template <class T> T** pop_row_back(T** arr, int& rows, const int cols)
 	//1) Создаем буфферный массив указателей
 	T** buffer = new T* [rows - 1] {};
 	//2) Копируем адреса строк в новый массив:
-	for (int i = 0; i < rows; i++)buffer[i] = arr[i];
+	for (int i = 0; i < rows-1; i++)buffer[i] = arr[i];
 	//3) Удаляем исходный массив указателей:
 	delete[] arr;
 	//4) После удаления строки уменьшаем количество строк:
@@ -371,10 +371,11 @@ template <class T> T* pop_front(T arr[], int& n)
 }
 template <class T> T** pop_row_front(T** arr, int& rows, const int cols)
 {
+	delete[] arr[0];
 	//1) Создаем буфферный массив указателей
 	T** buffer = new T* [rows - 1] {};
 	//2) Копируем адреса строк в новый массив:
-	for (int i = 0; i < rows; i++)buffer[i] = arr[i+1];
+	for (int i = 0; i < rows-1; i++)buffer[i] = arr[i+1];
 	//3) Удаляем исходный массив указателей:
 	delete[] arr;
 	//4) После удаления строки уменьшаем количество строк:
