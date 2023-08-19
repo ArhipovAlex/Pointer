@@ -226,17 +226,7 @@ template <class T> T* push_back(T arr[], int& n, T elem)
 }
 template <class T> T** push_row_back(T** arr, int& rows, const int cols)
 {
-	//1) Создаем буфферный массив указателей
-	T** buffer = new T* [rows + 1] {};
-	//2) Копируем адреса строк в новый массив:
-	for (int i = 0; i < rows; i++)buffer[i] = arr[i];
-	//3) Удаляем исходный массив указателей:
-	delete[] arr;
-	//4) Создаем добавляемую строку:
-	buffer[rows] = new T[cols] {};
-	//5) После добавления строки увеличиваем количество строк:
-	rows++;
-	return buffer;
+	return push_back(arr, rows, new T[cols]{});;
 }
 
 template <class T> T** push_col_back(T** arr, const int rows, int& cols)
